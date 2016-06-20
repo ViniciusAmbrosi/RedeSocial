@@ -1,0 +1,38 @@
+body{
+    background-color: rgb(236,237,255);
+    width: 100%;
+}
+
+.login {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+img {
+    width: 200px;
+}
+
+.container-login {
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.container.container-login label {
+    color: black;
+}
+
+.container.container-login input {
+    border: 1px transparent solid;
+    border-radius: 3px;
+}
+
+#bem-vindo{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#form-login{
+    width: 250px;
+}
