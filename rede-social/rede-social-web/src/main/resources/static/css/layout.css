@@ -12,6 +12,7 @@ body{
 
 #brand-link{
     padding:0px;
+    color: #c6c6c6;
 }
 
 #menu-container{
@@ -31,5 +32,6 @@ body{
 .dropdown-menu a{
     color:black !important;  
 }
+
 
 
