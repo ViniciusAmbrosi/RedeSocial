@@ -1,0 +1,41 @@
+<form class="form-horizontal" th:object="${usuario}" method="POST"> 
+    <!--action="#" th:action="@{/pessoa}"-->
+
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label" th:text="#{user.email}"></label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" th:field="*{email}" placeholder="Email" autofocus="true">
+        </div>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="nome" class="col-sm-2 control-label" th:text="#{user.nome}"></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:field="*{nome}" placeholder="Ex: Vinicius Ambrosi" autofocus="true">
+        </div>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label" th:text="#{user.senha}"></label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" th:field="*{senha}" autofocus="true">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label" th:text="#{user.senha.confirme}"></label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" th:field="*{senha}" autofocus="true">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success" th:value="#{cadastro.submit}"/>
+            </div>
+        </div>
+    </div>
+</form>
