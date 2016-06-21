@@ -16,18 +16,18 @@
 
         <div class="container container-login">
             <div class="content">
-                <form id="form-login" class="login" action="#" method="POST">
+                <form id="form-login" class="login" th:action="@{/login}" method="POST">
 
                     <div id="bem-vindo" th:text="#{login.brand}"/>
 
                     <div class="form-group">
-                        <label class="text-center" for="email" th:text="#{user.email}"></label>
-                        <input class="form-control" type="text"/>
+                        <label class="text-center" for="username" th:text="#{user.email}"></label>
+                        <input class="form-control" type="text" name="username"/>
                     </div>
 
                     <div class="form-group">
-                        <label class="text-center" for="email" th:text="#{user.senha}"></label>
-                        <input class="form-control" type="password" />
+                        <label class="text-center" for="password" th:text="#{user.senha}"></label>
+                        <input class="form-control" type="password" name="password"/>
                     </div>
 
                     <div class="form-group">
