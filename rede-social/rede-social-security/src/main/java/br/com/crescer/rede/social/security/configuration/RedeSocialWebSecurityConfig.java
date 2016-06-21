@@ -12,16 +12,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author vinicius.ambrosi
  */
 @Configuration
-public class RedeSocialWebSecurityConfig extends WebSecurityConfigurerAdapter{
-    
+public class RedeSocialWebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     RedeSocialUserDetailsService redeSocialUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/registrar", "/cadastrar", "/css/**", "/js/**", "/img/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
