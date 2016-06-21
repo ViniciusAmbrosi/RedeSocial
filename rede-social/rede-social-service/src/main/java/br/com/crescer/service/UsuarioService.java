@@ -1,7 +1,7 @@
 package br.com.crescer.service;
 
-import br.com.crescer.entity.Usuario;
-import br.com.crescer.repository.UsuarioRepository;
+import br.com.crescer.entity.Perfil;
+import br.com.crescer.repository.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioService {
 
-//    @Autowired
-//    UsuarioRepository repository;
+    @Autowired
+    PerfilRepository repository;
 
+    public Perfil findOneByEmail(String email){
+        return repository.findOneByDsEmail(email);
+    }
+    
 //    public Iterable<Usuario> findAll() {
 //        return repository.findAll();
 //    }
@@ -29,8 +33,4 @@ public class UsuarioService {
 //    public Usuario findById(Long id) {
 //        return repository.findOne(id);
 //    }
-
-    public Usuario findByEmail(String email) {
-        return UsuarioRepository.findByEmail(email);
-    }
 }

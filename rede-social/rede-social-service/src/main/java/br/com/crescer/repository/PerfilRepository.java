@@ -1,18 +1,12 @@
 package br.com.crescer.repository;
 
-import br.com.crescer.entity.Usuario;
+import br.com.crescer.entity.Perfil;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 
 /**
  * @author vinicius.ambrosi
  */
-public class UsuarioRepository  {
-
-    public static Usuario findByEmail(String email){
-        Usuario p = new Usuario();
-        p.setEmail("marotao");
-        p.setSenha("marotao");
-        return p;
-    };
-    
+public interface PerfilRepository extends PagingAndSortingRepository<Perfil, Long>{
+    Perfil findOneByDsEmail(String email);
 }
