@@ -36,3 +36,12 @@ img {
 #form-login{
     width: 250px;
 }
+
+
+#form-cadastro{
+    width: 250px;
+}
+
+.error{
+    color: red !important;
+}
