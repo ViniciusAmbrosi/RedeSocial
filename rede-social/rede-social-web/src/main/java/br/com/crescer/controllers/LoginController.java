@@ -19,7 +19,7 @@ public class LoginController {
 
     @Autowired
     PerfilService service;
-    
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model m) {
         return "login";
