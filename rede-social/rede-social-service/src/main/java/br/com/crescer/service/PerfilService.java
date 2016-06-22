@@ -1,7 +1,9 @@
 package br.com.crescer.service;
 
 import br.com.crescer.entity.Perfil;
+import br.com.crescer.entity.Pessoa;
 import br.com.crescer.repository.PerfilRepository;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @author vinicius.ambrosi
  */
 @Service
-public class UsuarioService {
+public class PerfilService {
 
     @Autowired
     PerfilRepository repository;
@@ -30,7 +32,7 @@ public class UsuarioService {
 //        repository.delete(id);
 //    }
 //
-//    public Usuario findById(Long id) {
+//    public Perfil findById(BigDecimal id) {
 //        return repository.findOne(id);
 //    }
 
