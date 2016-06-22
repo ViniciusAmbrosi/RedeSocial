@@ -1,0 +1,25 @@
+.inner{
+    background-color: white;
+    border: 1px transparent;
+    border-radius: 1px;
+    margin-bottom: 10px;
+}
+
+#menu-lateral{
+    padding: 10px;
+    background-color: inherit;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#imagem-lateral{
+    pagging-top: 10;
+}
+
+#cont-menu-lateral{
+    margin-top: 10px;
+}
+
+
