@@ -33,4 +33,8 @@ public class UsuarioService {
 //    public Usuario findById(Long id) {
 //        return repository.findOne(id);
 //    }
+
+    public void inserir(Perfil perfil) {
+        repository.save(perfil);
+    }
 }

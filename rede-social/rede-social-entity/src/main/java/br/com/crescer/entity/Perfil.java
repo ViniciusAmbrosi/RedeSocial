@@ -8,13 +8,17 @@ package br.com.crescer.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -36,6 +40,8 @@ public class Perfil implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PERFIL")
+    @SequenceGenerator(name = "SEQ_PERFIL", sequenceName = "SEQ_PERFIL", allocationSize = 1)
     @Column(name = "ID_PERFIL")
     private BigDecimal idPerfil;
     @Basic(optional = false)
@@ -45,7 +51,7 @@ public class Perfil implements Serializable {
     @Column(name = "DS_SENHA")
     private String dsSenha;
     @JoinColumn(name = "PESSOA_ID_PESSOA", referencedColumnName = "ID_PESSOA")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Pessoa pessoaIdPessoa;
 
     public Perfil() {
@@ -117,5 +123,5 @@ public class Perfil implements Serializable {
     public String toString() {
         return "br.com.crescer.entity.Perfil[ idPerfil=" + idPerfil + " ]";
     }
-    
+
 }

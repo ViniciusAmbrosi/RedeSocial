@@ -2,8 +2,10 @@ package br.com.crescer.controllers;
 
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Usuario;
+import br.com.crescer.service.UsuarioService;
 import javax.servlet.http.HttpSession;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
+    @Autowired
+    UsuarioService service;
+    
     @RequestMapping(value = "/login")
     public String login(Model m) {
         return "login";
@@ -33,7 +38,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registrar", method = RequestMethod.POST)
-    public String registrar(Perfil usuario) {
-        return "cadastro";
+    public String registrar(Perfil perfil) {
+        perfil.setDsSenha(new BCryptPasswordEncoder().encode(perfil.getDsSenha()));
+        service.inserir(perfil);
+        return "login";
     }
 }
