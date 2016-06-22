@@ -2,7 +2,7 @@ package br.com.crescer.controllers;
 
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Usuario;
-import br.com.crescer.service.UsuarioService;
+import br.com.crescer.service.PerfilService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
     @Autowired
-    UsuarioService service;
+    PerfilService service;
     
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model m) {
         return "login";
     }
