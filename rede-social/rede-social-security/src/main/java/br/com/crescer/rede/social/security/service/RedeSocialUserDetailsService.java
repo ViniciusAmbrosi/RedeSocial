@@ -28,6 +28,6 @@ public class RedeSocialUserDetailsService implements UserDetailsService {
         Pessoa pessoa = perfil.getPessoaIdPessoa();
         return new UserModel(perfil.getDsEmail(), perfil.getDsSenha(), 
                 SocialRoles.valuesToList(), pessoa.getNmPessoa(), pessoa.getIdPessoa(), 
-                perfil.getDsEmail(), pessoa.getDtNascPessoa(), pessoa.getTpSexoPessoa());
+                perfil.getDsEmail(), pessoa.getDtNascPessoa(), pessoa.getTpSexoPessoa(),pessoa.getIdPessoa());
     }
 }

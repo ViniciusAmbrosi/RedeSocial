@@ -20,6 +20,10 @@ public class PerfilService {
         return repository.findOneByDsEmail(email);
     }
     
+    public Perfil getPerfil (BigDecimal bd){
+        return repository.findOne(bd);
+    }
+    
 //    public Iterable<Usuario> findAll() {
 //        return repository.findAll();
 //    }
