@@ -1,0 +1,12 @@
+<div id="menu-lateral">
+    <div>
+        <img id="imagem-lateral" src="http://placehold.it/125x125" alt="imagem-perfil"/>
+    </div>
+
+    <div id="cont-menu-lateral">
+        <div th:text="${nome}"/>
+        <div th:text="${email}"/>
+        <span><a th:if="${outroPerfil}" th:href="@{${'/perfil'}(idPessoa=${idPessoa},idPerfil=${idPerfil})}" th:text="#{user.minha.conta}"/></span>
+        <div><a th:if="${not outroPerfil}" th:text="#{user.add}"/></div>
+    </div>
+</div>
