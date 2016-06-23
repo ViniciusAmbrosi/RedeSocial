@@ -24,6 +24,9 @@ public class PessoaController {
     @Autowired
     PerfilService servicePerfil;
 
+    @Autowired
+    HomeController homeController;
+
     @RequestMapping(value = "/home/menu-lateral")
     public String home(Model m) {
         return "lateral-pessoa";
@@ -31,9 +34,12 @@ public class PessoaController {
 
     @RequestMapping(value = "/perfil")
     public String perfil(BigDecimal idPessoa, BigDecimal idPerfil, Model model) {
+        UserModel usuarioLogado
+                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Pessoa p = servicePessoa.getPessoa(idPessoa);
         tabelaPessoa(idPerfil, model);
         model.addAttribute("pessoa", p);
+        homeController.header(usuarioLogado.getId(), model);
         return "perfil";
     }
 
