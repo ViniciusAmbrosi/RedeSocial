@@ -33,5 +33,50 @@ body{
     color:black !important;  
 }
 
+hr{
+    margin: 5px;
+}
 
+#solicitacao-amizade{
+    width: 200px;
+}
+
+#solicitacao-amizade li{
+    padding: 5px;
+}
+
+.button {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+.button-badge{
+    position: absolute;
+    top: -2px;
+    left: 8px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
+}
+
+.notificacoes button{
+    position: absolute;
+    top: 30px;
+}
+
+.aceitar-solicitacao{
+    left: 58px;
+}
+
+.rejeitar-solicitacao{
+    left: 113px;
+}
+
+.nome-pessoa{
+    position: absolute;
+    top: 0px;
+}
 
