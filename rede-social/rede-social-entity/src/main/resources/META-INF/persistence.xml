@@ -4,6 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.com.crescer.entity.Perfil</class>
     <class>br.com.crescer.entity.Pessoa</class>
+    <class>br.com.crescer.entity.Solicitacao</class>
+    <class>br.com.crescer.entity.Relacionamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="SOCIALMEDIA"/>
