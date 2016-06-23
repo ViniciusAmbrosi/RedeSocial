@@ -17,6 +17,3 @@ LoginView.prototype.registrar = function () {
     }.bind(this));
 };
 
-//LoginView.prototype.atualizarPagina = function (res) {
-//    var self = this;
-//};
