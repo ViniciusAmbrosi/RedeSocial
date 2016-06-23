@@ -29,21 +29,17 @@ public class HomeController {
     
     @Autowired
     PerfilService servicePerfil;
+    
+    @Autowired
+    HeaderComponent component;
+    
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model m) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         pessoaController.tabelaPessoa(usuarioLogado.getId(), m);
-        header(usuarioLogado.getId(), m);
+        component.createHeader(m, usuarioLogado.getId());
         return "home";
-    }
-    
-    public String header(BigDecimal bd, Model m){
-        Perfil perfil = servicePerfil.getPerfil(bd);
-        List<Solicitacao> solicitacoes = serviceSolicitacao.getSolicitacoes(perfil);
-        m.addAttribute("solicitacoes", solicitacoes);
-        m.addAttribute("solicitacoesAmizade", solicitacoes.size());
-        return "header";
     }
 }
