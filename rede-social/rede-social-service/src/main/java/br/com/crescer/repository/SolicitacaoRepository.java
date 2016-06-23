@@ -13,8 +13,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface SolicitacaoRepository extends PagingAndSortingRepository<Solicitacao, BigDecimal> {
 
-    public List<Solicitacao> findByIdPerfilSolicitacao(Perfil bd);
+    public List<Solicitacao> findByIdPerfilSolicitacaoAndTpStatusSolicitacao(Perfil bd, String tipo);
 
-    @Query(value = "SELECT * FROM SOLICITACAO S WHERE S.ID_PERFIL = ?1 AND S.ID_PERFIL_SOLICITACAO = ?2", nativeQuery = true)
-    public Solicitacao validarExistencia(BigDecimal idPerfil, BigDecimal idPerfilSolicitacao);
+    public Solicitacao findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike(Perfil perfil, Perfil perfilSolicitado, String tipo);
+//    select s from solicitacao s where s.idPerfil.id = :
+//    @Query(value = "SELECT * FROM SOLICITACAO S WHERE S.IDPERFIL. = ?1 AND S.ID_PERFIL_SOLICITACAO = ?2", nativeQuery = true)
+//    public Solicitacao validarExistencia(@BigDecimal idPerfil, BigDecimal idPerfilSolicitacao);
 }
