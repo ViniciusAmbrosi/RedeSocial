@@ -25,7 +25,7 @@ public class PessoaController {
     PerfilService servicePerfil;
 
     @Autowired
-    HomeController homeController;
+    HeaderComponent component;
 
     @RequestMapping(value = "/home/menu-lateral")
     public String home(Model m) {
@@ -39,7 +39,7 @@ public class PessoaController {
         Pessoa p = servicePessoa.getPessoa(idPessoa);
         tabelaPessoa(idPerfil, model);
         model.addAttribute("pessoa", p);
-        homeController.header(usuarioLogado.getId(), model);
+        component.createHeader(model, usuarioLogado.getId());
         return "perfil";
     }
 
