@@ -7,6 +7,18 @@
         <div th:text="${nome}"/>
         <div th:text="${email}"/>
         <span><a th:if="${outroPerfil}" th:href="@{${'/perfil'}(idPessoa=${idPessoa},idPerfil=${idPerfil})}" th:text="#{user.minha.conta}"/></span>
-        <div><a th:if="${not outroPerfil}" th:text="#{user.add}"/></div>
+        <div><a id="add-user" th:if="${not outroPerfil}" th:text="#{user.add}"/></div>
     </div>
+        <input id="h-id" hidden="true" th:value="${idPerfil}"/>
 </div>
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/Solicitacoes.js}"></script>
+    <script type="text/javascript" th:src="@{/js/MenuView.js}"></script>
+    <script>
+        new MenuView({
+            botaoAdicionar: $("#add-user"),
+            idAdicionar: $("#h-id").val()
+        }).registrar();
+    </script>
+</th:block>
