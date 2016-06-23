@@ -7,6 +7,7 @@ package br.com.crescer.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,9 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,6 +38,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Perfil.findByDsEmail", query = "SELECT p FROM Perfil p WHERE p.dsEmail = :dsEmail"),
     @NamedQuery(name = "Perfil.findByDsSenha", query = "SELECT p FROM Perfil p WHERE p.dsSenha = :dsSenha")})
 public class Perfil implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil")
+    private List<Relacionamento> relacionamentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfilRelacionamento")
+    private List<Relacionamento> relacionamentoList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil")
+    private List<Solicitacao> solicitacaoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfilSolicitacao")
+    private List<Solicitacao> solicitacaoList1;
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -122,6 +134,42 @@ public class Perfil implements Serializable {
     @Override
     public String toString() {
         return "br.com.crescer.entity.Perfil[ idPerfil=" + idPerfil + " ]";
+    }
+
+    @XmlTransient
+    public List<Relacionamento> getRelacionamentoList() {
+        return relacionamentoList;
+    }
+
+    public void setRelacionamentoList(List<Relacionamento> relacionamentoList) {
+        this.relacionamentoList = relacionamentoList;
+    }
+
+    @XmlTransient
+    public List<Relacionamento> getRelacionamentoList1() {
+        return relacionamentoList1;
+    }
+
+    public void setRelacionamentoList1(List<Relacionamento> relacionamentoList1) {
+        this.relacionamentoList1 = relacionamentoList1;
+    }
+
+    @XmlTransient
+    public List<Solicitacao> getSolicitacaoList() {
+        return solicitacaoList;
+    }
+
+    public void setSolicitacaoList(List<Solicitacao> solicitacaoList) {
+        this.solicitacaoList = solicitacaoList;
+    }
+
+    @XmlTransient
+    public List<Solicitacao> getSolicitacaoList1() {
+        return solicitacaoList1;
+    }
+
+    public void setSolicitacaoList1(List<Solicitacao> solicitacaoList1) {
+        this.solicitacaoList1 = solicitacaoList1;
     }
 
 }
