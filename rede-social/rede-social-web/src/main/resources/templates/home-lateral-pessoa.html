@@ -7,6 +7,7 @@
         <div th:text="${nome}"/>
         <div th:text="${email}"/>
         <span><a th:if="${outroPerfil}" th:href="@{${'/perfil'}(idPessoa=${idPessoa},idPerfil=${idPerfil})}" th:text="#{user.minha.conta}"/></span>
+        <span><a th:if="${outroPerfil}" th:href="@{${'/amigos'}(idPessoa=${idPessoa},idPerfil=${idPerfil})}" th:text="#{user.meus.amigos}"/></span>
         <div><a id="add-user" th:if="${not outroPerfil}" th:text="#{user.add}"/></div>
     </div>
         <input id="h-id" hidden="true" th:value="${idPerfil}"/>
