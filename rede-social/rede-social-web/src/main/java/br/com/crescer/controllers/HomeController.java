@@ -1,12 +1,9 @@
 package br.com.crescer.controllers;
 
-import br.com.crescer.entity.Perfil;
-import br.com.crescer.entity.Solicitacao;
+
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.SolicitacaoService;
-import java.math.BigDecimal;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,13 +30,17 @@ public class HomeController {
     @Autowired
     HeaderComponent component;
     
+    @Autowired
+    PublicacaoController controllerPublicacao; //TODO: refatorar para component
+    
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home(Model m) {
+    public String home(Model model) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        pessoaController.tabelaPessoa(usuarioLogado.getId(), m);
-        component.createHeader(m, usuarioLogado.getId());
+        pessoaController.tabelaPessoa(usuarioLogado.getId(), model);
+        component.createHeader(model, usuarioLogado.getId());
+        controllerPublicacao.getPublicacoesTimeline(model);
         return "home";
     }
 }
