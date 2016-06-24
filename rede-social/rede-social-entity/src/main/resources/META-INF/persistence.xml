@@ -6,6 +6,8 @@
     <class>br.com.crescer.entity.Pessoa</class>
     <class>br.com.crescer.entity.Solicitacao</class>
     <class>br.com.crescer.entity.Relacionamento</class>
+    <class>br.com.crescer.entity.Publicacao</class>
+    <class>br.com.crescer.entity.PublicacaoConteudo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="SOCIALMEDIA"/>
