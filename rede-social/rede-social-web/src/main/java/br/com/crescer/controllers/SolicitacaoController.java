@@ -24,8 +24,8 @@ public class SolicitacaoController {
 
     @Autowired
     PerfilService servicePerfil;
-    
-    @Autowired 
+
+    @Autowired
     private HeaderComponent component;
 
     @ResponseBody
@@ -40,14 +40,13 @@ public class SolicitacaoController {
         if (serviceSolicitacao.validaExistencia(solicitacao)) {
             serviceSolicitacao.inserir(solicitacao);
             return id;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
     }
 
     @RequestMapping(value = "/adicionar/amigo/rejeitar", method = RequestMethod.POST)
-    private String rejeitarAmigo(BigDecimal idPerfil, Model model){
+    private String rejeitarAmigo(BigDecimal idPerfil, Model model) {
         Solicitacao solicitacao = serviceSolicitacao.getById(idPerfil);
         serviceSolicitacao.alterarStatusRejeitado(solicitacao);
         component.createHeader(model, idPerfil);

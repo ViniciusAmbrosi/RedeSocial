@@ -15,8 +15,7 @@ public interface SolicitacaoRepository extends PagingAndSortingRepository<Solici
 
     public List<Solicitacao> findByIdPerfilSolicitacaoAndTpStatusSolicitacao(Perfil bd, String tipo);
 
-    public Solicitacao findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike(Perfil perfil, Perfil perfilSolicitado, String tipo);
-//    select s from solicitacao s where s.idPerfil.id = :
-//    @Query(value = "SELECT * FROM SOLICITACAO S WHERE S.IDPERFIL. = ?1 AND S.ID_PERFIL_SOLICITACAO = ?2", nativeQuery = true)
-//    public Solicitacao validarExistencia(@BigDecimal idPerfil, BigDecimal idPerfilSolicitacao);
+    public Solicitacao findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike(Perfil perfil, Perfil perfilSolicitado, String reprovado);
+
+    public Object findOneByIdPerfilSolicitacaoAndIdPerfilAndTpStatusSolicitacaoNotLike(Perfil idPerfil, Perfil idPerfilSolicitacao, String reprovado);
 }

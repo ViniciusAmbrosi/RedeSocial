@@ -20,8 +20,8 @@ public class SolicitacaoService {
     public void inserir(Solicitacao solicitacao) {
         repository.save(solicitacao);
     }
-    
-    public Solicitacao getById(BigDecimal bd){
+
+    public Solicitacao getById(BigDecimal bd) {
         return repository.findOne(bd);
     }
 
@@ -29,7 +29,7 @@ public class SolicitacaoService {
         solicitacao.setTpStatusSolicitacao("APROVADO");
         repository.save(solicitacao);
     }
-    
+
     public void alterarStatusRejeitado(Solicitacao solicitacao) {
         solicitacao.setTpStatusSolicitacao("REJEITADO");
         repository.save(solicitacao);
@@ -41,8 +41,8 @@ public class SolicitacaoService {
 
     public boolean validaExistencia(Solicitacao solicitacao) {
         try {
-            return null == repository.findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike
-        (solicitacao.getIdPerfil(), solicitacao.getIdPerfilSolicitacao(), "REPROVADO");
+            return null == repository.findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike(solicitacao.getIdPerfil(), solicitacao.getIdPerfilSolicitacao(), "REPROVADO")
+                    && null == repository.findOneByIdPerfilSolicitacaoAndIdPerfilAndTpStatusSolicitacaoNotLike(solicitacao.getIdPerfil(), solicitacao.getIdPerfilSolicitacao(), "REPROVADO");          
         } catch (Exception e) {
         }
         return false;
