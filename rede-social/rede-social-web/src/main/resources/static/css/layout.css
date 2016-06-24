@@ -80,3 +80,31 @@ hr{
     top: 0px;
 }
 
+#home-conteudo{
+    background-color: white;
+}
+
+.bloco-amigo{
+    padding:10px;
+    padding-bottom:5px;
+}
+
+.nome-pessoa{
+    padding: 35px 10px;
+}
+
+.user-details{
+    padding: 25px 10px;
+}
+
+.navbar-collapse.collapse.in{
+    color: #fff !important;
+}
+
+#form-busca-nome{
+    margin: 0px;
+}
+
+#nome-buscado{
+    height: 25px;
+}
