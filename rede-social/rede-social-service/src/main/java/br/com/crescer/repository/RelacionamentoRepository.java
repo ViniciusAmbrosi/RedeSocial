@@ -19,6 +19,6 @@ public interface RelacionamentoRepository extends PagingAndSortingRepository<Rel
     @Query("SELECT pe FROM Relacionamento res JOIN res.idPerfilRelacionamento pe WHERE res.idPerfil = :idPerfil")
     public List<Perfil> findAllFriends(@Param("idPerfil") Perfil idPerfil);
 
-    @Query("SELECT pe.idPerfil FROM Relacionamento res JOIN res.idPerfil pe WHERE res.idPerfil = :idPerfil")
+    @Query("SELECT pe.pessoaIdPessoa.idPessoa FROM Relacionamento res JOIN res.idPerfil pe WHERE res.idPerfil = :idPerfil")
     public List<BigDecimal> findIdAllFriends(@Param("idPerfil") Perfil idPerfil);
 }
