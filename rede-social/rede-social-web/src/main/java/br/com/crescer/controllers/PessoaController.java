@@ -29,7 +29,7 @@ public class PessoaController {
 
     @Autowired
     HeaderComponent component;
-    
+
     @Autowired
     RelacionamentoService serviceRelacionamento;
 
@@ -66,19 +66,21 @@ public class PessoaController {
     public String buscarPessoasNaoConhecidasPorNome(String nome, Model model) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Collection<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        List<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        amigos.add(new BigDecimal(0));
         List<Perfil> notFriends = servicePerfil.getNotFriendsByName(amigos, nome);
-        model.addAttribute("usuarios-encontrados", nome);
+        model.addAttribute("usuarios", notFriends);
         return "resultado-busca-perfil";
     }
-    
+
     @RequestMapping(value = "/buscar/pessoas")
     public String buscarPessoasNaoConhecidas(Model model) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Collection<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        List<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        amigos.add(new BigDecimal(0));
         List<Perfil> notFriends = servicePerfil.getNotFriends(amigos);
-        model.addAttribute("usuarios-encontrados", notFriends);
+        model.addAttribute("usuarios", notFriends);
         return "resultado-busca-perfil";
     }
 }
