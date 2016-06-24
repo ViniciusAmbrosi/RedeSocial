@@ -14,8 +14,8 @@ public class PessoaService {
 
     @Autowired
     PessoaRepository repository;
-    
-    public Pessoa getPessoa(BigDecimal id){
+
+    public Pessoa getPessoa(BigDecimal id) {
         return repository.findOne(id);
     }
 }

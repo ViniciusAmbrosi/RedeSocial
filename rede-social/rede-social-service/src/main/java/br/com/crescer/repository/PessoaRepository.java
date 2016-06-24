@@ -7,6 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * @author vinicius.ambrosi
  */
-public interface PessoaRepository extends PagingAndSortingRepository<Pessoa, BigDecimal>{
-    
+public interface PessoaRepository extends PagingAndSortingRepository<Pessoa, BigDecimal> {
+
 }
