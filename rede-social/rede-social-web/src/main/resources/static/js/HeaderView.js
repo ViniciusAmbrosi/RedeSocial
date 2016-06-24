@@ -26,17 +26,18 @@ HeaderView.prototype.registrar = function () {
         });
     }.bind(this));
 
-    $(this.formBuscaPorNome).submit(function () {
+    $(this.formBuscaPorNome).submit(function (e) {
         this.pessoas.getPessoasPorNome(this.inputBuscaPorNome.val()).done(function (res) {
             $('#home-conteudo').empty();
             $('#home-conteudo').append(res);
         });
+        e.preventDefault();
     }.bind(this));
 
-    $(this.botaoBuscaPessoas).click(function(){
-    this.pessoas.getPessoas().done(function (res) {
-        $('#home-conteudo').empty();
-        $('#home-conteudo').append(res);
-    });
+    $(this.botaoBuscaPessoas).click(function () {
+        this.pessoas.getPessoas().done(function (res) {
+            $('#home-conteudo').empty();
+            $('#home-conteudo').append(res);
+        });
     }.bind(this));
 };

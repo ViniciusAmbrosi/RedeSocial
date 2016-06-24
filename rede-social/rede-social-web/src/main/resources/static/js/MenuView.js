@@ -8,8 +8,9 @@ function MenuView(options) {
 }
 
 MenuView.prototype.registrar = function () {
-    $(this.botaoAdicionar.selector).click(function () {
-        this.solicitacoes.Cadastrar(this.id).done(function(res){
+    $(this.botaoAdicionar.selector).click(function (e) {
+        var idAtual = e.currentTarget.getAttribute('data-id');
+        this.solicitacoes.Cadastrar(idAtual === null ? this.id : idAtual).done(function(res){
             alert("Solicitação enviada com sucesso!");
         }).fail(function(res){
             alert("Já foi enviada uma solicitação para esse usuário!");
