@@ -22,7 +22,7 @@ public class UserModel extends User{
     private BigDecimal idPessoa;
     
     public UserModel(String username, String password,
-            Collection<? extends GrantedAuthority> authorities, String fullName, BigDecimal id,
+        Collection<? extends GrantedAuthority> authorities, String fullName, BigDecimal id,
             String email, Date datNasc, String sexo, BigDecimal idPessoa) {
         super(username, password, authorities);
         this.fullName = fullName;
