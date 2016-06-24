@@ -33,7 +33,7 @@ public class PerfilService {
     }
     
     public List<Perfil> getNotFriends(Collection<BigDecimal> amigos){
-        return repository. findByPessoaIdPessoa_idPessoaNotIn(amigos);
+        return repository.findByPessoaIdPessoa_idPessoaNotIn(amigos);
     }
 
     public void inserir(Perfil perfil) {
