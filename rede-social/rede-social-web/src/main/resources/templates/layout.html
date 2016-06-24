@@ -11,7 +11,7 @@
         <header id="header" th:include="header"></header>
         <div id="body-container" class="container">
             <div layout:fragment="content">
-                <h1>Static content for prototyping purposes only</h1>
+                    <h1>Static content for prototyping purposes only</h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
@@ -23,5 +23,15 @@
         </div>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <th:block layout:fragment="script"/>
+    <script type="text/javascript" th:src="@{/js/HomeView.js}"></script>
+    <script type="text/javascript" th:src="@{/js/Pessoas.js}"></script>
+    <script>
+        new HomeView({
+            divConteudo: $("#home-conteudo"),
+            idPerfil: $("#h-id").val(),
+            botaoAmigos: $('#meus-amigos'),
+            botaoPublicacoes: $('#publicacoes')
+        }).registrar();
+    </script>
 </body>
 </html>
