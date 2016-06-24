@@ -5,7 +5,10 @@ import br.com.crescer.entity.Pessoa;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.PessoaService;
+import br.com.crescer.service.RelacionamentoService;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,9 @@ public class PessoaController {
 
     @Autowired
     HeaderComponent component;
+    
+    @Autowired
+    RelacionamentoService serviceRelacionamento;
 
     @RequestMapping(value = "/home/menu-lateral")
     public String home(Model m) {
@@ -43,16 +49,36 @@ public class PessoaController {
         return "perfil";
     }
 
-    public String tabelaPessoa(BigDecimal bd, Model model) {
+    public String tabelaPessoa(BigDecimal idPerfil, Model model) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Perfil perfil = servicePerfil.getPerfil(bd);
-        boolean outroPerfil = bd.equals(usuarioLogado.getId());
+        Perfil perfil = servicePerfil.getPerfil(idPerfil);
+        boolean outroPerfil = idPerfil.equals(usuarioLogado.getId());
         model.addAttribute("email", perfil.getDsEmail());
         model.addAttribute("nome", perfil.getPessoaIdPessoa().getNmPessoa());
         model.addAttribute("idPerfil", perfil.getIdPerfil());
         model.addAttribute("idPessoa", perfil.getPessoaIdPessoa().getIdPessoa());
         model.addAttribute("outroPerfil", outroPerfil);
         return "home-tabela-pessoa";
+    }
+
+    @RequestMapping(value = "/buscar/pessoas/nome")
+    public String buscarPessoasNaoConhecidasPorNome(String nome, Model model) {
+        UserModel usuarioLogado
+                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Collection<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        List<Perfil> notFriends = servicePerfil.getNotFriendsByName(amigos, nome);
+        model.addAttribute("usuarios-encontrados", nome);
+        return "resultado-busca-perfil";
+    }
+    
+    @RequestMapping(value = "/buscar/pessoas")
+    public String buscarPessoasNaoConhecidas(Model model) {
+        UserModel usuarioLogado
+                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Collection<BigDecimal> amigos = serviceRelacionamento.getIdFromAllFriends(servicePerfil.getPerfil(usuarioLogado.getId()));
+        List<Perfil> notFriends = servicePerfil.getNotFriends(amigos);
+        model.addAttribute("usuarios-encontrados", notFriends);
+        return "resultado-busca-perfil";
     }
 }

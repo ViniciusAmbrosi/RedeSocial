@@ -1,0 +1,21 @@
+<div id="conteudo-amigos">
+    <div class="bloco-amigo col-lg-4 col-md-6 col-sm-12" th:each="p : ${perfis}">
+        <div class="inner">
+            <img id="imagem-lateral" src="http://placehold.it/75x75" class="img-circle" alt="imagem-perfil"/>
+            <span class="user-details">
+                <a th:href="@{${'/perfil'}(idPessoa=${p.pessoaIdPessoa.idPessoa},idPerfil=${p.idPerfil})}" 
+                   th:text='${p.pessoaIdPessoa.nmPessoa}'/>
+                <a href="#" th:attr="data-id=${p.idPerfil}" class="add-user" th:text="#{user.add}"/>
+            </span>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/BuscaFiltradaView.js}"></script>
+    <script>
+        new MenuView({
+            botaoAdicionar: $("#add-user"),
+            idAdicionar: $("#add-user").attr('data-id')
+        }).registrar();
+    </script>
+</th:block>
