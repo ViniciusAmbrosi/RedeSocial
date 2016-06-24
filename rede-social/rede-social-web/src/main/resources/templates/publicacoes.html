@@ -1,4 +1,6 @@
 <div class="panel panel-default" th:each="p : ${publicacoesAmigos}">
-    <div class="panel-heading" th:text="${p.idPublicacao.idPerfil.pessoaIdPessoa.nmPessoa} + ' - ' + ${p.idPublicacao.dtPublicacao}"/>
+    <div class="panel-heading"> <a th:href="@{${'/perfil'}(idPessoa=${p.idPublicacao.idPerfil.pessoaIdPessoa.idPessoa},idPerfil=${p.idPublicacao.idPerfil.idPerfil})}" th:text="${p.idPublicacao.idPerfil.pessoaIdPessoa.nmPessoa}"/>
+        <span th:text="' - ' + ${p.idPublicacao.dtPublicacao}"/>
+    </div>
     <div class="panel-body" th:text="${p.conteudo}"/>
 </div>
