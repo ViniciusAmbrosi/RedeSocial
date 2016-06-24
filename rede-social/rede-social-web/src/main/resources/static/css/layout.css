@@ -112,3 +112,20 @@ hr{
 #info-inferior{
     margin: 20px 0px;
 }
+
+textarea {
+    resize: none;
+}
+
+#publicacao-submit{
+    margin: 15px;
+}
+
+#publicacoes{
+    margin: 15px;
+}
+
+#conteudo-publicacoes{
+    margin: 180px 10px 10px;
+    margin-top: 180px;
+}
