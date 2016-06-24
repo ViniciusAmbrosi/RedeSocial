@@ -15,13 +15,25 @@
 
         <div class="collapse navbar-collapse" id="navbar-buttons">
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button id="busca-pessoas" type="button" class="achar-amigos btn btn-primary btn-xs navbar-btn" th:text="#{amizade.buscar}"/>
+                </li>
+                <li>
+                    <form id="form-busca-nome" class="navbar-form" role="search">
+                        <div class="form-group input-group-sm">
+                            <input type="search" class="form-control" id="nome-buscado" placeholder="Nome"/>
+                        </div>  
+                        <button type="submit" class="achar-amigos-nome btn btn-default btn-xs navbar-btn" th:text="#{amizade.buscar.por.nome}"/>
+                    </form>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <div class="button">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <span th:if="${solicitacoesAmizade != 0}" class="button-badge" th:text="${solicitacoesAmizade}"/>
+                            <span id="contador-solicitacoes" th:if="${solicitacoesAmizade != 0}" class="button-badge" th:text="${solicitacoesAmizade}"/>
                         </div>
                     </a>
+                    
                     <ul id="solicitacao-amizade" class="dropdown-menu">
                         <li th:text="#{header.requests}"></li>
                         <ul class="list-group">
@@ -67,11 +79,16 @@
 
 <th:block layout:fragment="script">
     <script type="text/javascript" th:src="@{/js/Relacionamentos.js}"></script>
+    <script type="text/javascript" th:src="@{/js/Pessoas.js}"></script>
     <script type="text/javascript" th:src="@{/js/HeaderView.js}"></script>
     <script>
         new HeaderView({
             botaoAceitar: $(".aceitar-solicitacao"),
-            botaoRejeitar: $(".rejeitar-solicitacao")
+            botaoRejeitar: $(".rejeitar-solicitacao"),
+            contadorAmizades: $('#contador-solicitacoes'),
+            formBuscaPorNome: $('#form-busca-nome'),
+            inputBuscaPorNome: $('#nome-buscado'),
+            botaoBuscaPessoas: $('#busca-pessoas')
         }).registrar();
     </script>
 </th:block>
