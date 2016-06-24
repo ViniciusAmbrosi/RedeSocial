@@ -1,10 +1,19 @@
-<form>   
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
+<h2 id="publicacoes">Publicacoes</h2>
+<form id="form-publicacoes" method="POST">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <textarea id="conteudo-publicacao" class="form-control" rows="3" th:placeholder="#{user.digite}"></textarea>
+        </div>
+    </div>
+    <button id="publicacao-submit" type="submit" class="btn btn-primary pull-right" th:text="#{user.postar}"/>
 </form>
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/Publicacoes.js}"></script>
+    <script type="text/javascript" th:src="@{/js/PublicacaoView.js}"></script>
+    <script>
+        new PublicacaoView({
+            formPublicacao: $("#form-publicacoes"),
+            inputPublicacao: $("#conteudo-publicacao")
+        }).registrar();
+    </script>
+</th:block>

@@ -1,11 +1,4 @@
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+<div class="panel panel-default" th:each="p : ${publicacoesAmigos}">
+    <div class="panel-heading" th:text="${p.idPublicacao.idPerfil.pessoaIdPessoa.nmPessoa} + ' - ' + ${p.idPublicacao.dtPublicacao}"/>
+    <div class="panel-body" th:text="${p.conteudo}"/>
+</div>
