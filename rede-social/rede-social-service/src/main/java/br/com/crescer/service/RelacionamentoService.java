@@ -25,18 +25,19 @@ public class RelacionamentoService {
         relacionamento.setIdPerfil(solicitacao.getIdPerfil());
         relacionamento.setIdPerfilRelacionamento(solicitacao.getIdPerfilSolicitacao());
         relacionamento.setDtRelacionamento(new Date());
-        repository.save(relacionamento);
         Relacionamento relacionamentoInverso = new Relacionamento();
-        relacionamento.setIdPerfil(solicitacao.getIdPerfilSolicitacao());
-        relacionamento.setIdPerfilRelacionamento(solicitacao.getIdPerfil());
-        relacionamento.setDtRelacionamento(new Date());
+        relacionamentoInverso.setIdPerfil(solicitacao.getIdPerfilSolicitacao());
+        relacionamentoInverso.setIdPerfilRelacionamento(solicitacao.getIdPerfil());
+        relacionamentoInverso.setDtRelacionamento(new Date());
+        repository.save(relacionamento);
+        repository.save(relacionamentoInverso);
     }
 
     public List<Perfil> getAllFriends(Perfil idPerfil) {
         return repository.findAllFriends(idPerfil);
     }
-    
-    public List<BigDecimal> getIdFromAllFriends(Perfil perfil){
+
+    public List<BigDecimal> getIdFromAllFriends(Perfil perfil) {
         return repository.findIdAllFriends(perfil);
     }
 }
