@@ -1,4 +1,4 @@
-package br.com.crescer.controllers;
+package br.com.crescer.components;
 
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Solicitacao;
@@ -37,3 +37,4 @@ public class HeaderComponent {
     }
 
 }
+
