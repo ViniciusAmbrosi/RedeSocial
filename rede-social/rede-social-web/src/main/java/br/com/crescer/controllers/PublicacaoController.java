@@ -1,5 +1,16 @@
 package br.com.crescer.controllers;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.com.crescer.components.PublicacaoComponent;
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Publicacao;
 import br.com.crescer.entity.PublicacaoConteudo;
@@ -8,14 +19,6 @@ import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.PublicacaoConteudoService;
 import br.com.crescer.service.PublicacaoService;
 import br.com.crescer.service.RelacionamentoService;
-import java.util.Date;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author vincius.ambrosi
@@ -34,6 +37,9 @@ public class PublicacaoController {
 
     @Autowired
     PerfilService servicePerfil;
+    
+    @Autowired
+    PublicacaoComponent componentPublicacao;
 
     @RequestMapping(value = "/publicacoes/publicar", method = RequestMethod.POST)
     public String publlicar(String post, Model model) {
@@ -50,20 +56,9 @@ public class PublicacaoController {
         return "publicacoes";
     }
 
-//    @RequestMapping(value = "/publicacoes", method = RequestMethod.GET)
-//    public String getPublicacoesPerfil(Model model) {
-//        return "publicacoes";
-//    }
     @RequestMapping(value = "/timeline", method = RequestMethod.GET)
     public String getPublicacoesTimeline(Model model) {
-        UserModel usuarioLogado
-                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Perfil usuario = servicePerfil.getPerfil(usuarioLogado.getId());
-        List<Perfil> amigos = serviceRelacionamento.getAllFriends(usuario);
-        amigos.add(usuario);
-        List<PublicacaoConteudo> publicacoesAmigos = servicePublicacao.getPublicacaoesFromFriends(amigos);
-        model.addAttribute("publicacao", new PublicacaoConteudo());
-        model.addAttribute("publicacoesAmigos", publicacoesAmigos);
+    	componentPublicacao.createPublicacoes(model);
         return "publicacoes";
     }
 }
