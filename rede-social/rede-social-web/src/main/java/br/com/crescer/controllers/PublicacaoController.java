@@ -27,9 +27,6 @@ import br.com.crescer.service.RelacionamentoService;
 public class PublicacaoController {
 
     @Autowired
-    PublicacaoService servicePublicacao;
-
-    @Autowired
     PublicacaoConteudoService serviceConteudo;
 
     @Autowired
