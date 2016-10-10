@@ -39,7 +39,7 @@ public class PublicacaoController {
     PerfilService servicePerfil;
     
     @Autowired
-    PublicacaoComponent componentPublicacao;
+    private PublicacaoComponent componentPublicacao;
 
     @RequestMapping(value = "/publicacoes/publicar", method = RequestMethod.POST)
     public String publlicar(String post, Model model) {
@@ -52,7 +52,7 @@ public class PublicacaoController {
         conteudo.getIdPublicacao().setTpPublicacao("POST");
         conteudo.getIdPublicacao().setIdPerfil(servicePerfil.getPerfil(usuarioLogado.getId()));
         serviceConteudo.inserir(conteudo);
-        getPublicacoesTimeline(model);
+        componentPublicacao.createPublicacoes(model);
         return "publicacoes";
     }
 

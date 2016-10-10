@@ -1,19 +1,22 @@
 package br.com.crescer.controllers;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.com.crescer.components.HeaderComponent;
+import br.com.crescer.components.PessoaComponent;
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Pessoa;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.PessoaService;
 import br.com.crescer.service.RelacionamentoService;
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author vinicius.ambrosi
@@ -28,10 +31,13 @@ public class PessoaController {
     PerfilService servicePerfil;
 
     @Autowired
-    HeaderComponent component;
-
-    @Autowired
     RelacionamentoService serviceRelacionamento;
+    
+    @Autowired
+    private PessoaComponent componentPessoa;
+    
+    @Autowired
+    private HeaderComponent componentHeader;
 
     @RequestMapping(value = "/home/menu-lateral")
     public String home(Model m) {
@@ -43,22 +49,14 @@ public class PessoaController {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Pessoa p = servicePessoa.getPessoa(idPessoa);
-        tabelaPessoa(idPerfil, model);
+        componentPessoa.createTabelaPessoa(idPerfil, model);
         model.addAttribute("pessoa", p);
-        component.createHeader(model, usuarioLogado.getId());
+        componentHeader.createHeader(model, usuarioLogado.getId());
         return "perfil";
     }
 
     public String tabelaPessoa(BigDecimal idPerfil, Model model) {
-        UserModel usuarioLogado
-                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Perfil perfil = servicePerfil.getPerfil(idPerfil);
-        boolean outroPerfil = idPerfil.equals(usuarioLogado.getId());
-        model.addAttribute("email", perfil.getDsEmail());
-        model.addAttribute("nome", perfil.getPessoaIdPessoa().getNmPessoa());
-        model.addAttribute("idPerfil", perfil.getIdPerfil());
-        model.addAttribute("idPessoa", perfil.getPessoaIdPessoa().getIdPessoa());
-        model.addAttribute("outroPerfil", outroPerfil);
+    	componentPessoa.createTabelaPessoa(idPerfil, model);
         return "home-tabela-pessoa";
     }
 

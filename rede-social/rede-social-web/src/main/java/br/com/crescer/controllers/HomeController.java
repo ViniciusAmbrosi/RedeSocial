@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.crescer.components.HeaderComponent;
+import br.com.crescer.components.PessoaComponent;
 import br.com.crescer.components.PublicacaoComponent;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
@@ -21,26 +23,25 @@ import br.com.crescer.service.SolicitacaoService;
 public class HomeController {
 
     @Autowired
-    PessoaController pessoaController; //TODO: refatorar para component
-    
-    @Autowired
     SolicitacaoService serviceSolicitacao;
     
     @Autowired
     PerfilService servicePerfil;
     
     @Autowired
-    HeaderComponent componentHeader;
+    private HeaderComponent componentHeader;
     
     @Autowired
-    PublicacaoComponent componentPublicacao;
+    private PublicacaoComponent componentPublicacao;
     
-
+    @Autowired
+    private PessoaComponent componentPessoa;
+    
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
         UserModel usuarioLogado
                 = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        pessoaController.tabelaPessoa(usuarioLogado.getId(), model);
+        componentPessoa.createTabelaPessoa(usuarioLogado.getId(), model);
         componentHeader.createHeader(model, usuarioLogado.getId());
         componentPublicacao.createPublicacoes(model);
         return "home";
