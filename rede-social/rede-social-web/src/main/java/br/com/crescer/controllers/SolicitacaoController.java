@@ -29,7 +29,7 @@ public class SolicitacaoController {
     PerfilService servicePerfil;
 
     @Autowired
-    private HeaderComponent component;
+    private HeaderComponent componentHeader;
 
     @ResponseBody
     @RequestMapping(value = "/adicionar/amigo", method = RequestMethod.POST)
@@ -52,7 +52,7 @@ public class SolicitacaoController {
     private String rejeitarAmigo(BigDecimal idPerfil, Model model) {
         Solicitacao solicitacao = serviceSolicitacao.getById(idPerfil);
         serviceSolicitacao.alterarStatusRejeitado(solicitacao);
-        component.createHeader(model, idPerfil);
+        componentHeader.createHeader(model, idPerfil);
         return "header";
     }
 }

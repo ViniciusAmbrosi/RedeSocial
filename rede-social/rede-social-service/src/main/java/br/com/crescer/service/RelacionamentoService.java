@@ -1,15 +1,15 @@
 package br.com.crescer.service;
 
-import br.com.crescer.entity.Perfil;
-import br.com.crescer.entity.Pessoa;
-import br.com.crescer.entity.Relacionamento;
-import br.com.crescer.entity.Solicitacao;
-import br.com.crescer.repository.RelacionamentoRepository;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import br.com.crescer.entity.Perfil;
+import br.com.crescer.entity.Relacionamento;
+import br.com.crescer.entity.Solicitacao;
+import br.com.crescer.repository.RelacionamentoRepository;
 
 /**
  * @author vinicius.ambrosi
@@ -33,11 +33,29 @@ public class RelacionamentoService {
 		repository.save(relacionamentoInverso);
 	}
 
-	public List<Perfil> getAllFriends(Perfil idPerfil) {
-		return repository.findByIdPerfil(idPerfil.getIdPerfil());
-	}
-
-	public List<BigDecimal> getIdFromAllFriends(Perfil perfil) {
-		return repository.findIdPerfilByIdPerfilAllFriends(perfil.getIdPerfil());
-	}
+    public List<BigDecimal> getIdFromAllFriends(Perfil perfil) {
+        List<Relacionamento> relashionships = repository.findByIdPerfil_idPerfilEquals(perfil.getIdPerfil());
+        return getProfilesIdsFromRelationships(relashionships);
+    }
+    
+    public List<Perfil> getAllFriends(Perfil idPerfil) {
+        List<Relacionamento> relashionships = repository.findByIdPerfil_idPerfilEquals(idPerfil.getIdPerfil());
+        return this.getProfilesFromRelationships(relashionships);
+    }
+    
+    private List<Perfil> getProfilesFromRelationships (List<Relacionamento> relashionships){
+    	List<Perfil> friends = new ArrayList<Perfil>();
+    	for(Relacionamento relashionship : relashionships){
+    		friends.add(relashionship.getIdPerfilRelacionamento());
+    	}
+    	return friends;
+    }
+    
+    private List<BigDecimal> getProfilesIdsFromRelationships (List<Relacionamento> relashionships){
+    	List<BigDecimal> friendsIds = new ArrayList<BigDecimal>();
+    	for(Relacionamento relashionship : relashionships){
+    		friendsIds.add(relashionship.getIdPerfilRelacionamento().getIdPerfil());
+    	}
+    	return friendsIds;
+    }
 }

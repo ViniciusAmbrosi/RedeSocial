@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.PublicacaoConteudo;
+import br.com.crescer.entity.Relacionamento;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
+import br.com.crescer.service.PublicacaoConteudoService;
 import br.com.crescer.service.PublicacaoService;
 import br.com.crescer.service.RelacionamentoService;
 
@@ -30,6 +32,9 @@ public class PublicacaoComponent {
 	@Autowired
 	PublicacaoService servicePublicacao;
 	
+	@Autowired
+	PublicacaoConteudoService servicePublicacaoConteudo;
+	
 	public void createPublicacoes(Model model){
         UserModel usuarioLogado
 		        = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -37,7 +42,7 @@ public class PublicacaoComponent {
 		//TODO: revisar lógica para buscar posts de amigos e usuario
 		List<Perfil> amigos = serviceRelacionamento.getAllFriends(usuario);
 		amigos.add(usuario);
-		List<PublicacaoConteudo> publicacoesAmigos = servicePublicacao.getPublicacaoesFromFriends(amigos);
+		List<PublicacaoConteudo> publicacoesAmigos = servicePublicacaoConteudo.getPublicacaoesFromFriends(amigos);
 		model.addAttribute("publicacao", new PublicacaoConteudo());
 		model.addAttribute("publicacoesAmigos", publicacoesAmigos);
 	}

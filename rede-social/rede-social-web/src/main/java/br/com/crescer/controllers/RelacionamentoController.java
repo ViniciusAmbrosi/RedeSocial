@@ -22,9 +22,6 @@ import br.com.crescer.service.SolicitacaoService;
 public class RelacionamentoController {
 
     @Autowired
-    private HeaderComponent component;
-
-    @Autowired
     RelacionamentoService serviceRelacionamento;
     
     @Autowired
@@ -32,7 +29,10 @@ public class RelacionamentoController {
 
     @Autowired
     SolicitacaoService serviceSolicitacao;
-
+    
+    @Autowired
+    private HeaderComponent component;
+    
     @RequestMapping(value = "/adicionar/amigo/aceitar", method = RequestMethod.POST)
     public String aceitarAmigo(BigDecimal idPerfil, Model model) {
         Solicitacao solicitacao = serviceSolicitacao.getById(idPerfil);
