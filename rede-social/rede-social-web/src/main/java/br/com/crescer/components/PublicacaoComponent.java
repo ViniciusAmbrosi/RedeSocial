@@ -46,5 +46,12 @@ public class PublicacaoComponent {
 		model.addAttribute("publicacao", new PublicacaoConteudo());
 		model.addAttribute("publicacoesAmigos", publicacoesAmigos);
 	}
-
+	
+	public void createMyProfilePosts(Model model){
+        UserModel usuarioLogado
+        	= (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<PublicacaoConteudo> userPosts = servicePublicacaoConteudo.getUserPosts(usuarioLogado.getId());
+		model.addAttribute("publicacao", new PublicacaoConteudo());
+		model.addAttribute("publicacoesAmigos", userPosts);
+	}
 }

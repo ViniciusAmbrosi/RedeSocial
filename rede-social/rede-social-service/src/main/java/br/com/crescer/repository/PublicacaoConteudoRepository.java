@@ -17,7 +17,5 @@ public interface PublicacaoConteudoRepository extends PagingAndSortingRepository
     
 	public List<PublicacaoConteudo> findAllByIdPublicacao_idPerfilInOrderByIdPublicacao_dtPublicacaoDesc(List<Perfil> perfisId);
 	
-//    @Query("SELECT pc FROM PublicacaoConteudo pc JOIN pc.idPublicacao pu WHERE pu.idPerfil = :perfil ORDER BY pu.dtPublicacao DESC")
-//    public PublicacaoConteudo findPublicacoesUsuario(@Param("perfil") Perfil perfis);
-	//TODO: implementar busca de publicações do usuario
+	public List<PublicacaoConteudo> findAllByIdPublicacao_idPerfil_idPerfilEquals(BigDecimal idPerfil);
 }

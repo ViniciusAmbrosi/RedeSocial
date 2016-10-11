@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.crescer.components.HeaderComponent;
 import br.com.crescer.components.PessoaComponent;
+import br.com.crescer.components.PublicacaoComponent;
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Pessoa;
 import br.com.crescer.rede.social.security.model.UserModel;
@@ -38,6 +39,9 @@ public class PessoaController {
     
     @Autowired
     private HeaderComponent componentHeader;
+    
+    @Autowired
+    private PublicacaoComponent componentPublicacao;
 
     @RequestMapping(value = "/home/menu-lateral")
     public String home(Model m) {
@@ -52,6 +56,7 @@ public class PessoaController {
         componentPessoa.createTabelaPessoa(idPerfil, model);
         model.addAttribute("pessoa", p);
         componentHeader.createHeader(model, usuarioLogado.getId());
+        componentPublicacao.createMyProfilePosts(model);
         return "perfil";
     }
 

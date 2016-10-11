@@ -29,7 +29,7 @@ public class PublicacaoConteudoService {
         return repository.findAllByIdPublicacao_idPerfilInOrderByIdPublicacao_dtPublicacaoDesc(perfis);
     }
     
-//    public PublicacaoConteudo getPublicacaoes(Perfil perfil) {
-//        return repository.findPublicacoesUsuario(perfil);
-//    }
+    public List<PublicacaoConteudo> getUserPosts(BigDecimal idPerfil) {
+        return repository.findAllByIdPublicacao_idPerfil_idPerfilEquals(idPerfil);
+    }
 }
