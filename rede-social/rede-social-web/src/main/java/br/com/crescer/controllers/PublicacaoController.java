@@ -1,24 +1,17 @@
 package br.com.crescer.controllers;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import br.com.crescer.components.PublicacaoComponent;
-import br.com.crescer.entity.Perfil;
-import br.com.crescer.entity.Publicacao;
 import br.com.crescer.entity.PublicacaoConteudo;
+import br.com.crescer.extensions.PublicacaoConteudoExtensions;
+import br.com.crescer.extensions.UserModelExtensions;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.PublicacaoConteudoService;
-import br.com.crescer.service.PublicacaoService;
-import br.com.crescer.service.RelacionamentoService;
 
 /**
  * @author vincius.ambrosi
@@ -27,10 +20,7 @@ import br.com.crescer.service.RelacionamentoService;
 public class PublicacaoController {
 
     @Autowired
-    PublicacaoConteudoService serviceConteudo;
-
-    @Autowired
-    RelacionamentoService serviceRelacionamento;
+    PublicacaoConteudoService servicePublicacaoConteudo;
 
     @Autowired
     PerfilService servicePerfil;
@@ -40,15 +30,10 @@ public class PublicacaoController {
 
     @RequestMapping(value = "/publicacoes/publicar", method = RequestMethod.POST)
     public String publlicar(String post, Model model) {
-        UserModel usuarioLogado
-                = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        PublicacaoConteudo conteudo = new PublicacaoConteudo();
-        conteudo.setConteudo(post);
-        conteudo.setIdPublicacao(new Publicacao());
-        conteudo.getIdPublicacao().setDtPublicacao(new Date());
-        conteudo.getIdPublicacao().setTpPublicacao("POST");
-        conteudo.getIdPublicacao().setIdPerfil(servicePerfil.getPerfil(usuarioLogado.getId()));
-        serviceConteudo.inserir(conteudo);
+        UserModel usuarioLogado = UserModelExtensions.getUsuarioLogado();
+        PublicacaoConteudo conteudo = PublicacaoConteudoExtensions.generatePublicacao(post);
+        conteudo.getPublicacao().setPerfil(UserModelExtensions.fromModel(usuarioLogado));
+        servicePublicacaoConteudo.inserir(conteudo);
         componentPublicacao.createPublicacoes(model);
         return "publicacoes";
     }
