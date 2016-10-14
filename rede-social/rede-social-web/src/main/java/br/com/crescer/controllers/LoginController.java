@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
     @Autowired
-    PerfilService service;
+    PerfilService servicePerfil;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model m) {
@@ -39,8 +39,8 @@ public class LoginController {
 
     @RequestMapping(value = "/registrar", method = RequestMethod.POST)
     public String registrar(Perfil perfil) {
-        perfil.setDsSenha(new BCryptPasswordEncoder().encode(perfil.getDsSenha()));
-        service.inserir(perfil);
+        perfil.setSenha(new BCryptPasswordEncoder().encode(perfil.getSenha()));
+        servicePerfil.inserir(perfil);
         return "login";
     }
 }
