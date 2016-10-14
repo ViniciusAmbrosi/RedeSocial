@@ -9,5 +9,7 @@ import br.com.crescer.repository.PublicacaoRepository;
  */
 @Service
 public class PublicacaoService {
-
+	
+	@Autowired
+	PublicacaoRepository publicacaoRepository;
 }

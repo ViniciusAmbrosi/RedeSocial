@@ -1,6 +1,5 @@
 package br.com.crescer.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,39 +21,39 @@ public class RelacionamentoService {
 
 	public void salvarRelacionamento(Solicitacao solicitacao) {
 		Relacionamento relacionamento = new Relacionamento();
-		relacionamento.setIdPerfil(solicitacao.getIdPerfil());
-		relacionamento.setIdPerfilRelacionamento(solicitacao.getIdPerfilSolicitacao());
-		relacionamento.setDtRelacionamento(new Date());
+		relacionamento.setPerfil(solicitacao.getPerfil());
+		relacionamento.setPerfilRelacionamento(solicitacao.getPerfilSolicitacao());
+		relacionamento.setDataInicio(new Date());
 		Relacionamento relacionamentoInverso = new Relacionamento();
-		relacionamentoInverso.setIdPerfil(solicitacao.getIdPerfilSolicitacao());
-		relacionamentoInverso.setIdPerfilRelacionamento(solicitacao.getIdPerfil());
-		relacionamentoInverso.setDtRelacionamento(new Date());
+		relacionamentoInverso.setPerfil(solicitacao.getPerfilSolicitacao());
+		relacionamentoInverso.setPerfilRelacionamento(solicitacao.getPerfil());
+		relacionamentoInverso.setDataInicio(new Date());
 		repository.save(relacionamento);
 		repository.save(relacionamentoInverso);
 	}
 
-    public List<BigDecimal> getIdFromAllFriends(Perfil perfil) {
-        List<Relacionamento> relashionships = repository.findByIdPerfil_idPerfilEquals(perfil.getIdPerfil());
+    public List<Long> getIdFromAllFriends(Perfil perfil) {
+        List<Relacionamento> relashionships = repository.findByPerfil_IdEquals(perfil.getId());
         return getProfilesIdsFromRelationships(relashionships);
     }
     
-    public List<Perfil> getAllFriends(Perfil idPerfil) {
-        List<Relacionamento> relashionships = repository.findByIdPerfil_idPerfilEquals(idPerfil.getIdPerfil());
+    public List<Perfil> getAllFriends(Long id) {
+        List<Relacionamento> relashionships = repository.findByPerfil_IdEquals(id);
         return this.getProfilesFromRelationships(relashionships);
     }
     
     private List<Perfil> getProfilesFromRelationships (List<Relacionamento> relashionships){
     	List<Perfil> friends = new ArrayList<Perfil>();
     	for(Relacionamento relashionship : relashionships){
-    		friends.add(relashionship.getIdPerfilRelacionamento());
+    		friends.add(relashionship.getPerfilRelacionamento());
     	}
     	return friends;
     }
     
-    private List<BigDecimal> getProfilesIdsFromRelationships (List<Relacionamento> relashionships){
-    	List<BigDecimal> friendsIds = new ArrayList<BigDecimal>();
+    private List<Long> getProfilesIdsFromRelationships (List<Relacionamento> relashionships){
+    	List<Long> friendsIds = new ArrayList<Long>();
     	for(Relacionamento relashionship : relashionships){
-    		friendsIds.add(relashionship.getIdPerfilRelacionamento().getIdPerfil());
+    		friendsIds.add(relashionship.getPerfilRelacionamento().getId());
     	}
     	return friendsIds;
     }

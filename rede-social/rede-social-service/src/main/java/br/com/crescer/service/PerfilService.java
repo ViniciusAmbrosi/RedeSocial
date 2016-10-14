@@ -1,15 +1,11 @@
 package br.com.crescer.service;
 
-import br.com.crescer.entity.Perfil;
-import br.com.crescer.entity.Pessoa;
-import br.com.crescer.repository.PerfilRepository;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.crescer.entity.Perfil;
+import br.com.crescer.repository.PerfilRepository;
 
 /**
  * @author vinicius.ambrosi
@@ -21,19 +17,19 @@ public class PerfilService {
     PerfilRepository repository;
 
     public Perfil findOneByEmail(String email) {
-        return repository.findOneByDsEmail(email);
+        return repository.findOneByEmail(email);
     }
 
-    public Perfil getPerfil(BigDecimal bd) {
+    public Perfil getPerfil(Long bd) {
         return repository.findOne(bd);
     }
 
-    public List<Perfil> getNotFriendsByName(Collection<BigDecimal> amigos, String filtro) {
-        return repository.findByPessoaIdPessoa_idPessoaNotInAndPessoaIdPessoa_nmPessoaContainingIgnoreCase(amigos, filtro);
+    public List<Perfil> getNotFriendsByName(Collection<Long> amigos, String filtro) {
+        return repository.findByPessoa_idNotInAndPessoa_nomeContainingIgnoreCase(amigos, filtro);
     }
     
-    public List<Perfil> getNotFriends(Collection<BigDecimal> amigos){
-        return repository.findByPessoaIdPessoa_idPessoaNotIn(amigos);
+    public List<Perfil> getNotFriends(Collection<Long> amigos){
+        return repository.findByPessoa_idNotIn(amigos);
     }
 
     public void inserir(Perfil perfil) {

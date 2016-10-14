@@ -3,7 +3,6 @@ package br.com.crescer.service;
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Solicitacao;
 import br.com.crescer.repository.SolicitacaoRepository;
-import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class SolicitacaoService {
         repository.save(solicitacao);
     }
 
-    public Solicitacao getById(BigDecimal bd) {
+    public Solicitacao getById(Long bd) {
         return repository.findOne(bd);
     }
 
@@ -36,13 +35,13 @@ public class SolicitacaoService {
     }
 
     public List<Solicitacao> getSolicitacoes(Perfil bd) {
-        return repository.findByIdPerfilSolicitacaoAndTpStatusSolicitacao(bd, "PENDENTE");
+        return repository.findByPerfilSolicitacaoAndTipoStatus(bd, "PENDENTE");
     }
 
     public boolean validaExistencia(Solicitacao solicitacao) {
         try {
-            return null == repository.findOneByIdPerfilAndIdPerfilSolicitacaoAndTpStatusSolicitacaoNotLike(solicitacao.getIdPerfil(), solicitacao.getIdPerfilSolicitacao(), "REPROVADO")
-                    && null == repository.findOneByIdPerfilSolicitacaoAndIdPerfilAndTpStatusSolicitacaoNotLike(solicitacao.getIdPerfil(), solicitacao.getIdPerfilSolicitacao(), "REPROVADO");          
+            return null == repository.findOneByPerfilAndPerfilSolicitacaoAndTipoStatusNotLike(solicitacao.getPerfil(), solicitacao.getPerfilSolicitacao(), "REPROVADO")
+                    && null == repository.findOneByPerfilSolicitacaoAndPerfilAndTipoStatusNotLike(solicitacao.getPerfil(), solicitacao.getPerfilSolicitacao(), "REPROVADO");          
         } catch (Exception e) {
         }
         return false;
