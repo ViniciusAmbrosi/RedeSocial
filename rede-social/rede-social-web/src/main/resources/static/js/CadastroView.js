@@ -35,7 +35,7 @@ CadastroView.prototype.validar = function () {
             'pessoa.sexo': 'Informe seu sexo.'
         },
         success: function (label) {
-            label.addClass("valid").text("Ok!")
+        	$(label).parent().parent().addClass('has-success').addClass('has-feedback');
         },
         highlight: function (element, errorClass) {
             $(element).fadeOut(function () {

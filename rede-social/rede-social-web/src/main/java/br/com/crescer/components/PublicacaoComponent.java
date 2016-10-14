@@ -19,7 +19,7 @@ import br.com.crescer.extensions.UserModelExtensions;
 public class PublicacaoComponent {
 
 	private static final String PUBLICACAO = "publicacao";
-	private static final String PUBLICACOES = "publicacoesAmigos";
+	private static final String PUBLICACOES = "publicacoes";
 	
 	@Autowired
 	RelacionamentoService serviceRelacionamento;
