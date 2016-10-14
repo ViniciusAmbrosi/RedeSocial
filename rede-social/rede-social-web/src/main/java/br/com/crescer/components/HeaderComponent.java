@@ -4,7 +4,7 @@ import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.Solicitacao;
 import br.com.crescer.service.PerfilService;
 import br.com.crescer.service.SolicitacaoService;
-import java.math.BigDecimal;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class HeaderComponent {
     @Autowired
     private SolicitacaoService solicitacaoService;
 
-    public void createHeader(Model model, BigDecimal idPefil) {
+    public void createHeader(Model model, Long idPefil) {
         final Perfil perfil;
         perfil = perfilService.getPerfil(idPefil);
         

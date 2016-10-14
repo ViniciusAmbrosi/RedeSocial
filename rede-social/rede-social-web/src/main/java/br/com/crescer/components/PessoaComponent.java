@@ -1,13 +1,10 @@
 package br.com.crescer.components;
 
-import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
-
 import br.com.crescer.entity.Perfil;
+import br.com.crescer.extensions.UserModelExtensions;
 import br.com.crescer.rede.social.security.model.UserModel;
 import br.com.crescer.service.PerfilService;
 
@@ -23,9 +20,9 @@ public class PessoaComponent {
 	@Autowired
 	PerfilService servicePerfil;
 	
-	public void createTabelaPessoa(BigDecimal idPerfil, Model model){
+	public void createTabelaPessoa(Long idPerfil, Model model){
         final UserModel usuarioLogado;
-        usuarioLogado = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuarioLogado = UserModelExtensions.getUsuarioLogado();
         
 		final Perfil perfil; 
 		perfil = servicePerfil.getPerfil(idPerfil);
@@ -33,10 +30,10 @@ public class PessoaComponent {
 		final boolean outroPerfil; 
 		outroPerfil = idPerfil.equals(usuarioLogado.getId());
 		
-		model.addAttribute(EMAIL, perfil.getDsEmail());
-		model.addAttribute(NOME, perfil.getPessoaIdPessoa().getNmPessoa());
-		model.addAttribute(ID_PERFIL, perfil.getIdPerfil());
-		model.addAttribute(ID_PESSOA, perfil.getPessoaIdPessoa().getIdPessoa());
+		model.addAttribute(EMAIL, perfil.getEmail());
+		model.addAttribute(NOME, perfil.getPessoa().getNome());
+		model.addAttribute(ID_PERFIL, perfil.getId());
+		model.addAttribute(ID_PESSOA, perfil.getPessoa().getId());
 		model.addAttribute(OUTRO_PERFIL, outroPerfil);
 	}
 }
