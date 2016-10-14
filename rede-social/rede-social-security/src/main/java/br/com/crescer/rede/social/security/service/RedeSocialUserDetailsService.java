@@ -25,9 +25,9 @@ public class RedeSocialUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("User with email=%s was not found", email));
         }
         Perfil perfil = usuarioServico.findOneByEmail(email);
-        Pessoa pessoa = perfil.getPessoaIdPessoa();
-        return new UserModel(perfil.getDsEmail(), perfil.getDsSenha(), 
-                SocialRoles.valuesToList(), pessoa.getNmPessoa(), pessoa.getIdPessoa(), 
-                perfil.getDsEmail(), pessoa.getDtNascPessoa(), pessoa.getTpSexoPessoa(),pessoa.getIdPessoa());
+        Pessoa pessoa = perfil.getPessoa();
+        return new UserModel(perfil.getEmail(), perfil.getSenha(), 
+                SocialRoles.valuesToList(), pessoa.getNome(), pessoa.getId(), 
+                perfil.getEmail(), pessoa.getDataNascimento(), pessoa.getSexo(),pessoa.getId());
     }
 }
