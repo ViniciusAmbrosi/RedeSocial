@@ -1,8 +1,6 @@
 
 package br.com.crescer.rede.social.security.model;
 
-import br.com.crescer.entity.Pessoa;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,26 +11,27 @@ import org.springframework.security.core.userdetails.User;
  */
 
 public class UserModel extends User{
-    
-    private String fullName;
-    private BigDecimal id;
+
+	private static final long serialVersionUID = 1L;
+	
+	private String fullName;
+    private Long id;
     private String email;
     private Date dataNasc;
     private String sexo;
-    private BigDecimal idPessoa;
+    private Long idPessoa;
     
     public UserModel(String username, String password,
-        Collection<? extends GrantedAuthority> authorities, String fullName, BigDecimal id,
-            String email, Date datNasc, String sexo, BigDecimal idPessoa) {
+        Collection<? extends GrantedAuthority> authorities, String fullName, Long id,
+            String email, Date datNasc, String sexo, Long idPessoa) {
         super(username, password, authorities);
         this.fullName = fullName;
         this.id = id;
         this.email = email;
-        this.dataNasc = dataNasc;
         this.sexo = sexo;
         this.idPessoa = idPessoa;
     }
-
+    
     public String getFullName() {
         return fullName;
     }
@@ -41,11 +40,11 @@ public class UserModel extends User{
         this.fullName = fullName;
     }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,11 +72,11 @@ public class UserModel extends User{
         this.sexo = sexo;
     }
 
-    public BigDecimal getIdPessoa() {
+    public Long getIdPessoa() {
         return idPessoa;
     }
 
-    public void setIdPessoa(BigDecimal idPessoa) {
+    public void setIdPessoa(Long idPessoa) {
         this.idPessoa = idPessoa;
     }
 }
