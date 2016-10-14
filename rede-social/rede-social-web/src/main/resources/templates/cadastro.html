@@ -1,16 +1,16 @@
 <form id="form-cadastro" class="login form-horizontal" action="#" th:action="@{/registrar}" method="POST"> 
 
     <div class="form-group">
-        <label for="dsEmail" class="col-sm-2 control-label" th:text="#{user.email}"></label>
+        <label for="email" class="col-sm-2 control-label" th:text="#{user.email}"></label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" name="dsEmail" placeholder="Email" autofocus="true"/>
+            <input type="email" class="form-control" name="email" placeholder="Email" autofocus="true"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="dsSenha" class="col-sm-2 control-label" th:text="#{user.senha}"></label>
+        <label for="senha" class="col-sm-2 control-label" th:text="#{user.senha}"></label>
         <div class="col-sm-10">
-            <input id="dsSenha" type="password" class="form-control" name="dsSenha"  autofocus="true"/>
+            <input id="senha" type="password" class="form-control" name="senha"  autofocus="true"/>
         </div>
     </div>
 
@@ -22,23 +22,23 @@
     </div>
 
     <div class="form-group">
-        <label for="pessoaIdPessoa.nmPessoa" class="col-sm-2 control-label" th:text="#{user.nome}"></label>
+        <label for="pessoa.nome" class="col-sm-2 control-label" th:text="#{user.nome}"></label>
         <div class="col-sm-10">
-            <input type="pessoaIdPessoa.nmPessoa" class="form-control" name="pessoaIdPessoa.nmPessoa" autofocus="true"/>
+            <input type="pessoa.nome" class="form-control" name="pessoa.nome" autofocus="true"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="pessoaIdPessoa.dtNascPessoa" class="col-sm-2 control-label" th:text="#{user.data}"></label>
+        <label for="pessoa.dataNascimento" class="col-sm-2 control-label" th:text="#{user.data}"></label>
         <div class="col-sm-10">
-            <input type="pessoaIdPessoa.dtNascPessoa" class="form-control" name="pessoaIdPessoa.dtNascPessoa" autofocus="true"/>
+            <input type="pessoa.dataNascimento" class="form-control" name="pessoa.dataNascimento" autofocus="true"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="pessoaIdPessoa.tpSexoPessoa" class="col-sm-2 control-label" th:text="#{user.sexo}"></label>
+        <label for="pessoa.sexo" class="col-sm-2 control-label" th:text="#{user.sexo}"></label>
         <div class="col-sm-10">
-            <input type="pessoaIdPessoa.tpSexoPessoa" class="form-control" name="pessoaIdPessoa.tpSexoPessoa" autofocus="true"/>
+            <input type="pessoa.sexo" class="form-control" name="pessoa.sexo" autofocus="true"/>
         </div>
     </div>
 
