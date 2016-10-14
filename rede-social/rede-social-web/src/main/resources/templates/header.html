@@ -37,14 +37,14 @@
                     <ul id="solicitacao-amizade" class="dropdown-menu">
                         <li th:text="#{header.requests}"></li>
                         <ul class="list-group">
-                            <li class="notificacoes list-group-item" th:each="s : ${solicitacoes}">
+                            <li class="notificacoes list-group-item" th:each="solicitacao : ${solicitacoes}">
                                 <div>
                                     <span>
                                         <img id="imagem-notificacao" src="http://placehold.it/50x50" alt="imagem-perfil"/>
-                                        <a class="nome-pessoa" th:href="@{${'/perfil'}(idPessoa=${s.idPerfil.pessoaIdPessoa.idPessoa},idPerfil=${s.idPerfil.idPerfil})}" 
-                                           th:text='${s.idPerfil.pessoaIdPessoa.nmPessoa}'/><br/>
-                                        <button th:attr="data-id=${s.idSolicitacao}" type="button" class="aceitar-solicitacao btn btn-primary btn-xs" th:text="#{amizade.aceitar}"/>
-                                        <button th:attr="data-id=${s.idSolicitacao}" type="button" class="rejeitar-solicitacao btn btn-default btn-xs" th:text="#{amizade.rejeitar}"/>
+                                        <a class="nome-pessoa" th:href="@{${'/perfil'}(idPessoa=${solicitacao.perfil.pessoa.id},perfil=${solicitacao.perfil.id})}" 
+                                           th:text='${solicitacao.perfil.pessoa.nome}'/><br/>
+                                        <button th:attr="data-id=${solicitacao.id}" type="button" class="aceitar-solicitacao btn btn-primary btn-xs" th:text="#{amizade.aceitar}"/>
+                                        <button th:attr="data-id=${solicitacao.id}" type="button" class="rejeitar-solicitacao btn btn-default btn-xs" th:text="#{amizade.rejeitar}"/>
                                     </span>
                                 </div>
                             </li>
