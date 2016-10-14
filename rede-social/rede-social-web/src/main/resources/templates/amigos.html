@@ -1,10 +1,9 @@
 <div id="conteudo-amigos">
-    <div class="bloco-amigo col-lg-4 col-md-6 col-sm-12" th:each="p : ${perfis}">
+    <div class="bloco-amigo col-lg-4 col-md-6 col-sm-12" th:each="perfil : ${perfis}">
         <div class="inner">
             <img id="imagem-lateral" src="http://placehold.it/75x75" class="img-circle" alt="imagem-perfil"/>
-
-            <a class="nome-pessoa" th:href="@{${'/perfil'}(idPessoa=${p.pessoaIdPessoa.idPessoa},idPerfil=${p.idPerfil})}" 
-               th:text='${p.pessoaIdPessoa.nmPessoa}'/>
+            <a class="nome-pessoa" th:href="@{${'/perfil'}(idPessoa=${perfil.pessoa.id},idPerfil=${perfil.id})}" 
+               th:text='${perfil.pessoa.nome}'/>
         </div>
     </div>
 </div>
