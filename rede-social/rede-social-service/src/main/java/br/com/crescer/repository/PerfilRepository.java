@@ -1,7 +1,6 @@
 package br.com.crescer.repository;
 
 import br.com.crescer.entity.Perfil;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -9,11 +8,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * @author vinicius.ambrosi
  */
-public interface PerfilRepository extends PagingAndSortingRepository<Perfil, BigDecimal> {
+public interface PerfilRepository extends PagingAndSortingRepository<Perfil, Long> {
 
-    Perfil findOneByDsEmail(String email);
+    Perfil findOneByEmail(String email);
 
-    List<Perfil> findByPessoaIdPessoa_idPessoaNotInAndPessoaIdPessoa_nmPessoaContainingIgnoreCase(Collection<BigDecimal> amigos, String filtro);
+    List<Perfil> findByPessoa_idNotInAndPessoa_nomeContainingIgnoreCase(Collection<Long> amigos, String filtro);
     
-    List<Perfil> findByPessoaIdPessoa_idPessoaNotIn(Collection<BigDecimal> amigos);
+    List<Perfil> findByPessoa_idNotIn(Collection<Long> amigos);
 }
