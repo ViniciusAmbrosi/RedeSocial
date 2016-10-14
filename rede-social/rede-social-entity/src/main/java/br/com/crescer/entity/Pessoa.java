@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.crescer.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,113 +25,97 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "PESSOA")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findByIdPessoa", query = "SELECT p FROM Pessoa p WHERE p.idPessoa = :idPessoa"),
-    @NamedQuery(name = "Pessoa.findByNmPessoa", query = "SELECT p FROM Pessoa p WHERE p.nmPessoa = :nmPessoa"),
-    @NamedQuery(name = "Pessoa.findByDtNascPessoa", query = "SELECT p FROM Pessoa p WHERE p.dtNascPessoa = :dtNascPessoa"),
-    @NamedQuery(name = "Pessoa.findByTpSexoPessoa", query = "SELECT p FROM Pessoa p WHERE p.tpSexoPessoa = :tpSexoPessoa")})
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOA")
     @SequenceGenerator(name = "SEQ_PESSOA", sequenceName = "SEQ_PESSOA", allocationSize = 1)
     @Column(name = "ID_PESSOA")
-    private BigDecimal idPessoa;
+    private Long id;
+    
     @Basic(optional = false)
     @Column(name = "NM_PESSOA")
-    private String nmPessoa;
+    private String nome;
+    
     @Basic(optional = false)
     @Column(name = "DT_NASC_PESSOA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dtNascPessoa;
+    private Date dataNascimento;
+    
     @Basic(optional = false)
     @Column(name = "TP_SEXO_PESSOA")
-    private String tpSexoPessoa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaIdPessoa")
-    private List<Perfil> perfilList;
+    private String sexo;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
+    private List<Perfil> amigos;
 
     public Pessoa() {
     }
 
-    public Pessoa(BigDecimal idPessoa) {
-        this.idPessoa = idPessoa;
+    public Pessoa(Long id) {
+        this.id = id;
     }
 
-    public Pessoa(BigDecimal idPessoa, String nmPessoa, Date dtNascPessoa, String tpSexoPessoa) {
-        this.idPessoa = idPessoa;
-        this.nmPessoa = nmPessoa;
-        this.dtNascPessoa = dtNascPessoa;
-        this.tpSexoPessoa = tpSexoPessoa;
+    public Pessoa(Long id, String nome, Date dataNascimento, String sexo) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
     }
 
-    public BigDecimal getIdPessoa() {
-        return idPessoa;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPessoa(BigDecimal idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNmPessoa() {
-        return nmPessoa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNmPessoa(String nmPessoa) {
-        this.nmPessoa = nmPessoa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Date getDtNascPessoa() {
-        return dtNascPessoa;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setDtNascPessoa(Date dtNascPessoa) {
-        this.dtNascPessoa = dtNascPessoa;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public String getTpSexoPessoa() {
-        return tpSexoPessoa;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setTpSexoPessoa(String tpSexoPessoa) {
-        this.tpSexoPessoa = tpSexoPessoa;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     @XmlTransient
-    public List<Perfil> getPerfilList() {
-        return perfilList;
+    public List<Perfil> getAmigos() {
+        return amigos;
     }
 
-    public void setPerfilList(List<Perfil> perfilList) {
-        this.perfilList = perfilList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPessoa != null ? idPessoa.hashCode() : 0);
-        return hash;
+    public void setAmigos(List<Perfil> amigos) {
+        this.amigos = amigos;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Pessoa)) {
             return false;
         }
         Pessoa other = (Pessoa) object;
-        if ((this.idPessoa == null && other.idPessoa != null) || (this.idPessoa != null && !this.idPessoa.equals(other.idPessoa))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.crescer.entity.Pessoa[ idPessoa=" + idPessoa + " ]";
-    }
-
 }

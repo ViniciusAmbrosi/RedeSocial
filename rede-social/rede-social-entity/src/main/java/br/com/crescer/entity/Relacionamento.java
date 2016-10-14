@@ -1,7 +1,6 @@
 package br.com.crescer.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,98 +22,90 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "RELACIONAMENTO")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Relacionamento.findAll", query = "SELECT r FROM Relacionamento r"),
-    @NamedQuery(name = "Relacionamento.findByIdRelacionamento", query = "SELECT r FROM Relacionamento r WHERE r.idRelacionamento = :idRelacionamento"),
-    @NamedQuery(name = "Relacionamento.findByDtRelacionamento", query = "SELECT r FROM Relacionamento r WHERE r.dtRelacionamento = :dtRelacionamento")})
 public class Relacionamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RELACIONAMENTO")
     @SequenceGenerator(name = "SEQ_RELACIONAMENTO", sequenceName = "SEQ_RELACIONAMENTO", allocationSize = 1)
     @Column(name = "ID_RELACIONAMENTO")
-    private BigDecimal idRelacionamento;
+    private Long id;
+    
     @Basic(optional = false)
-    @Column(name = "DT_RELACIONAMENTO")
+    @Column(name = "DT_INICIO")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dtRelacionamento;
+    private Date dataInicio;
+    
     @JoinColumn(name = "ID_PERFIL", referencedColumnName = "ID_PERFIL")
     @ManyToOne(optional = false)
-    private Perfil idPerfil;
+    private Perfil perfil;
+    
     @JoinColumn(name = "ID_PERFIL_RELACIONAMENTO", referencedColumnName = "ID_PERFIL")
     @ManyToOne(optional = false)
-    private Perfil idPerfilRelacionamento;
+    private Perfil perfilRelacionamento;
 
     public Relacionamento() {
     }
 
-    public Relacionamento(BigDecimal idRelacionamento) {
-        this.idRelacionamento = idRelacionamento;
+    public Relacionamento(Long id) {
+        this.id = id;
     }
 
-    public Relacionamento(BigDecimal idRelacionamento, Date dtRelacionamento) {
-        this.idRelacionamento = idRelacionamento;
-        this.dtRelacionamento = dtRelacionamento;
+    public Relacionamento(Long id, Date dataInicio) {
+        this.id = id;
+        this.dataInicio = dataInicio;
     }
 
-    public BigDecimal getIdRelacionamento() {
-        return idRelacionamento;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRelacionamento(BigDecimal idRelacionamento) {
-        this.idRelacionamento = idRelacionamento;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Date getDtRelacionamento() {
-        return dtRelacionamento;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setDtRelacionamento(Date dtRelacionamento) {
-        this.dtRelacionamento = dtRelacionamento;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Perfil getIdPerfil() {
-        return idPerfil;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setIdPerfil(Perfil idPerfil) {
-        this.idPerfil = idPerfil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
-    public Perfil getIdPerfilRelacionamento() {
-        return idPerfilRelacionamento;
+    public Perfil getPerfilRelacionamento() {
+        return perfilRelacionamento;
     }
 
-    public void setIdPerfilRelacionamento(Perfil idPerfilRelacionamento) {
-        this.idPerfilRelacionamento = idPerfilRelacionamento;
+    public void setPerfilRelacionamento(Perfil perfilRelacionamento) {
+        this.perfilRelacionamento = perfilRelacionamento;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRelacionamento != null ? idRelacionamento.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Relacionamento)) {
             return false;
         }
         Relacionamento other = (Relacionamento) object;
-        if ((this.idRelacionamento == null && other.idRelacionamento != null) || (this.idRelacionamento != null && !this.idRelacionamento.equals(other.idRelacionamento))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.crescer.entity.Relacionamento[ idRelacionamento=" + idRelacionamento + " ]";
-    }
-    
 }

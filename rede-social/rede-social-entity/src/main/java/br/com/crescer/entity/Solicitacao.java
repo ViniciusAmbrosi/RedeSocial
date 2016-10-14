@@ -1,7 +1,6 @@
 package br.com.crescer.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,78 +19,77 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "SOLICITACAO")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Solicitacao.findAll", query = "SELECT s FROM Solicitacao s"),
-    @NamedQuery(name = "Solicitacao.findByIdSolicitacao", query = "SELECT s FROM Solicitacao s WHERE s.idSolicitacao = :idSolicitacao"),
-    @NamedQuery(name = "Solicitacao.findByTpStatusSolicitacao", query = "SELECT s FROM Solicitacao s WHERE s.tpStatusSolicitacao = :tpStatusSolicitacao")})
 public class Solicitacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SOLICITACAO")
     @SequenceGenerator(name = "SEQ_SOLICITACAO", sequenceName = "SEQ_SOLICITACAO", allocationSize = 1)
     @Column(name = "ID_SOLICITACAO")
-    private BigDecimal idSolicitacao;
+    private Long id;
+    
     @Basic(optional = false)
     @Column(name = "TP_STATUS_SOLICITACAO")
-    private String tpStatusSolicitacao;
+    private String tipoStatus;
+    
     @JoinColumn(name = "ID_PERFIL", referencedColumnName = "ID_PERFIL")
     @ManyToOne(optional = false)
-    private Perfil idPerfil;
+    private Perfil perfil;
+    
     @JoinColumn(name = "ID_PERFIL_SOLICITACAO", referencedColumnName = "ID_PERFIL")
     @ManyToOne(optional = false)
-    private Perfil idPerfilSolicitacao;
+    private Perfil perfilSolicitacao;
 
     public Solicitacao() {
     }
 
-    public Solicitacao(BigDecimal idSolicitacao) {
-        this.idSolicitacao = idSolicitacao;
+    public Solicitacao(Long idSolicitacao) {
+        this.id = idSolicitacao;
     }
 
-    public Solicitacao(BigDecimal idSolicitacao, String tpStatusSolicitacao) {
-        this.idSolicitacao = idSolicitacao;
-        this.tpStatusSolicitacao = tpStatusSolicitacao;
+    public Solicitacao(Long idSolicitacao, String tipoStatus) {
+        this.id = idSolicitacao;
+        this.tipoStatus = tipoStatus;
     }
 
-    public BigDecimal getIdSolicitacao() {
-        return idSolicitacao;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdSolicitacao(BigDecimal idSolicitacao) {
-        this.idSolicitacao = idSolicitacao;
+    public void setId(Long idSolicitacao) {
+        this.id = idSolicitacao;
     }
 
-    public String getTpStatusSolicitacao() {
-        return tpStatusSolicitacao;
+    public String getTipoStatus() {
+        return tipoStatus;
     }
 
-    public void setTpStatusSolicitacao(String tpStatusSolicitacao) {
-        this.tpStatusSolicitacao = tpStatusSolicitacao;
+    public void setTpStatusSolicitacao(String tipoStatus) {
+        this.tipoStatus = tipoStatus;
     }
 
-    public Perfil getIdPerfil() {
-        return idPerfil;
+    public Perfil getPerfil() {
+        return this.perfil;
     }
 
-    public void setIdPerfil(Perfil idPerfil) {
-        this.idPerfil = idPerfil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
-    public Perfil getIdPerfilSolicitacao() {
-        return idPerfilSolicitacao;
+    public Perfil getPerfilSolicitacao() {
+        return perfilSolicitacao;
     }
 
-    public void setIdPerfilSolicitacao(Perfil idPerfilSolicitacao) {
-        this.idPerfilSolicitacao = idPerfilSolicitacao;
+    public void setPerfilSolicitacao(Perfil perfilSolicitacao) {
+        this.perfilSolicitacao = perfilSolicitacao;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idSolicitacao != null ? idSolicitacao.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -103,17 +99,11 @@ public class Solicitacao implements Serializable {
             return false;
         }
         Solicitacao other = (Solicitacao) object;
-        if ((this.idPerfil == null && other.idPerfil != null) && (this.idPerfilSolicitacao == null && other.idPerfilSolicitacao != null)
-                || (this.idPerfil != null && !this.idPerfil.equals(other.idPerfil))
-                && ((this.idPerfilSolicitacao != null && !this.idPerfilSolicitacao.equals(other.idPerfilSolicitacao)))) {
+        if ((this.perfil == null && other.perfil != null) && (this.perfilSolicitacao == null && other.perfilSolicitacao != null)
+                || (this.perfil != null && !this.perfil.equals(other.perfil))
+                && ((this.perfilSolicitacao != null && !this.perfilSolicitacao.equals(other.perfilSolicitacao)))) {
             return false;
         }
-        return !other.getTpStatusSolicitacao().equals(this.getTpStatusSolicitacao()) && !"APROVADA".equals(other.getTpStatusSolicitacao());
+        return !other.getTipoStatus().equals(this.getTipoStatus()) && !"APROVADA".equals(other.getTipoStatus());
     }
-
-    @Override
-    public String toString() {
-        return "br.com.crescer.entity.Solicitacao[ idSolicitacao=" + idSolicitacao + " ]";
-    }
-
 }

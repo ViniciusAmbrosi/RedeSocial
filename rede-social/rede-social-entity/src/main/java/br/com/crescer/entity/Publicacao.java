@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.crescer.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -18,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -35,111 +27,96 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "PUBLICACAO")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Publicacao.findAll", query = "SELECT p FROM Publicacao p"),
-    @NamedQuery(name = "Publicacao.findByIdPublicacao", query = "SELECT p FROM Publicacao p WHERE p.idPublicacao = :idPublicacao"),
-    @NamedQuery(name = "Publicacao.findByDtPublicacao", query = "SELECT p FROM Publicacao p WHERE p.dtPublicacao = :dtPublicacao"),
-    @NamedQuery(name = "Publicacao.findByTpPublicacao", query = "SELECT p FROM Publicacao p WHERE p.tpPublicacao = :tpPublicacao")})
 public class Publicacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PUBLICACAO")
     @SequenceGenerator(name = "SEQ_PUBLICACAO", sequenceName = "SEQ_PUBLICACAO", allocationSize = 1)
     @Column(name = "ID_PUBLICACAO")
-    private BigDecimal idPublicacao;
+    private Long id;
+    
     @Basic(optional = false)
     @Column(name = "DT_PUBLICACAO")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dtPublicacao;
+    private Date data;
+    
     @Basic(optional = false)
     @Column(name = "TP_PUBLICACAO")
-    private String tpPublicacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacao")
-    private List<PublicacaoConteudo> publicacaoconteudoList;
+    private String tipo;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacao")
+    private List<PublicacaoConteudo> publicacoes;
+    
     @JoinColumn(name = "ID_PERFIL", referencedColumnName = "ID_PERFIL")
     @ManyToOne(optional = false)
-    private Perfil idPerfil;
+    private Perfil perfil;
 
     public Publicacao() {
     }
 
-    public Publicacao(BigDecimal idPublicacao) {
-        this.idPublicacao = idPublicacao;
+    public Publicacao(Long idPublicacao) {
+        this.id = idPublicacao;
     }
 
-    public Publicacao(BigDecimal idPublicacao, Date dtPublicacao, String tpPublicacao) {
-        this.idPublicacao = idPublicacao;
-        this.dtPublicacao = dtPublicacao;
-        this.tpPublicacao = tpPublicacao;
+    public Publicacao(Long id, Date data, String tipo) {
+        this.id = id;
+        this.data = data;
+        this.tipo = tipo;
     }
 
-    public BigDecimal getIdPublicacao() {
-        return idPublicacao;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPublicacao(BigDecimal idPublicacao) {
-        this.idPublicacao = idPublicacao;
+    public void setId(Long idPublicacao) {
+        this.id = idPublicacao;
     }
 
-    public Date getDtPublicacao() {
-        return dtPublicacao;
+    public Date getData() {
+        return data;
     }
 
-    public void setDtPublicacao(Date dtPublicacao) {
-        this.dtPublicacao = dtPublicacao;
+    public void setData(Date dtPublicacao) {
+        this.data = dtPublicacao;
     }
 
-    public String getTpPublicacao() {
-        return tpPublicacao;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTpPublicacao(String tpPublicacao) {
-        this.tpPublicacao = tpPublicacao;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @XmlTransient
-    public List<PublicacaoConteudo> getPublicacaoconteudoList() {
-        return publicacaoconteudoList;
+    public List<PublicacaoConteudo> getPublicacoes() {
+        return publicacoes;
     }
 
-    public void setPublicacaoconteudoList(List<PublicacaoConteudo> publicacaoconteudoList) {
-        this.publicacaoconteudoList = publicacaoconteudoList;
+    public void setPublicacoes(List<PublicacaoConteudo> publicacoes) {
+        this.publicacoes = publicacoes;
     }
 
-    public Perfil getIdPerfil() {
-        return idPerfil;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setIdPerfil(Perfil idPerfil) {
-        this.idPerfil = idPerfil;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPublicacao != null ? idPublicacao.hashCode() : 0);
-        return hash;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Publicacao)) {
             return false;
         }
         Publicacao other = (Publicacao) object;
-        if ((this.idPublicacao == null && other.idPublicacao != null) || (this.idPublicacao != null && !this.idPublicacao.equals(other.idPublicacao))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.crescer.entity.Publicacao[ idPublicacao=" + idPublicacao + " ]";
-    }
-
 }
