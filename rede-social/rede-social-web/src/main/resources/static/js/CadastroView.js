@@ -7,32 +7,32 @@ function CadastroView(options) {
 CadastroView.prototype.validar = function () {
     $(this.form).validate({
         rules: {
-            dsEmail: {
+            email: {
                 required: true,
                 email: true
             },
-            dsSenha: "required",
+            senha: "required",
             confirmacaoSenha: {
                 required: true,
-                equalTo: "#dsSenha"
+                equalTo: "#senha"
             },
-            'pessoaIdPessoa.nmPessoa': "required",
-            'pessoaIdPessoa.dtNascPessoa': "required",
-            'pessoaIdPessoa.tpSexoPessoa': "required"
+            'pessoa.nome': "required",
+            'pessoa.dataNascimento': "required",
+            'pessoa.sexo': "required"
         },
         messages: {
-            dsEmail: {
+            email: {
                 required: 'Digitar um email.',
                 email: 'Formato de email inválido, tente novamente.'
             },
-            dsSenha: "Insira uma senha.",
+            senha: "Insira uma senha.",
             confirmacaoSenha: {
                 required: "Confirme sua senha.",
                 equalTo: "As senhas não batem, tente novamente."
             },
-            'pessoaIdPessoa.nmPessoa': 'Informe seu nome.',
-            'pessoaIdPessoa.dtNascPessoa': 'Informe uma data de nascimento.',
-            'pessoaIdPessoa.tpSexoPessoa': 'Informe seu sexo.'
+            'pessoa.nome': 'Informe seu nome.',
+            'pessoa.dataNascimento': 'Informe uma data de nascimento.',
+            'pessoa.sexo': 'Informe seu sexo.'
         },
         success: function (label) {
             label.addClass("valid").text("Ok!")
