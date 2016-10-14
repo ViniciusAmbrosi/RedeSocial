@@ -1,16 +1,16 @@
 package br.com.crescer.repository;
 
 import br.com.crescer.entity.Relacionamento;
-import java.math.BigDecimal;
+
 import java.util.List;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * @author vinicius.ambrosi
  */
-public interface RelacionamentoRepository extends PagingAndSortingRepository<Relacionamento, BigDecimal> {
+public interface RelacionamentoRepository extends PagingAndSortingRepository<Relacionamento, Long> {
 
-    public List<Relacionamento> findByIdPerfilOrIdPerfilRelacionamento(BigDecimal idPerfil, BigDecimal idPerfilSolicitado);
+    public List<Relacionamento> findByPerfil_IdOrPerfilRelacionamento_Id(Long id, Long idPerfilSolicitado);
 
-    public List<Relacionamento> findByIdPerfil_idPerfilEquals(BigDecimal idPerfil);
+    public List<Relacionamento> findByPerfil_IdEquals(Long id);
 }

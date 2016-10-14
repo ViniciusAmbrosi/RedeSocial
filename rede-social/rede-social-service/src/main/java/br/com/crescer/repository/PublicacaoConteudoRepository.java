@@ -1,21 +1,16 @@
 package br.com.crescer.repository;
 
-import java.math.BigDecimal;
 import java.util.List;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-
 import br.com.crescer.entity.Perfil;
 import br.com.crescer.entity.PublicacaoConteudo;
 
 /**
  * @author vinicius.ambrosi
  */
-public interface PublicacaoConteudoRepository extends PagingAndSortingRepository<PublicacaoConteudo, BigDecimal> {
+public interface PublicacaoConteudoRepository extends PagingAndSortingRepository<PublicacaoConteudo, Long> {
     
-	public List<PublicacaoConteudo> findAllByIdPublicacao_idPerfilInOrderByIdPublicacao_dtPublicacaoDesc(List<Perfil> perfisId);
+	public List<PublicacaoConteudo> findAllByPublicacao_PerfilInOrderByPublicacao_dataDesc(List<Perfil> perfis);
 	
-	public List<PublicacaoConteudo> findAllByIdPublicacao_idPerfil_idPerfilEquals(BigDecimal idPerfil);
+	public List<PublicacaoConteudo> findAllByPublicacao_Perfil_idEquals(Long id);
 }
